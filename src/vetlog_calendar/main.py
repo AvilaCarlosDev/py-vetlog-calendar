@@ -95,13 +95,17 @@ def list_vaccinations(
         pet_repository = PetRepository(session)
         user_repository = UserRepository(session)
         vaccinations = service.get_pending_vaccinations()
-        
+
         # Print message if no new vaccinations found
         if not vaccinations:
-            message = "No new vaccinations were found" if language == "en" else "No se encontraron nuevas vacunaciones"
+            message = (
+                "No se encontraron nuevas vacunaciones"
+                if language == "es"
+                else "No new vaccinations were found"
+            )
             print(message)
             return
-        
+
         for vaccination in vaccinations:
             pet = pet_repository.find_by_id(vaccination.pet_id)
 
